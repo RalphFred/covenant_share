@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { fetchSubmissions, updateStatus } from "../../lib/utils";
-import { FormData } from "@/components/Form";
 
 export type Submission = {
   id: string;
@@ -13,6 +12,7 @@ export type Submission = {
   dateOfFlight: string;
   timeOfArrival: string;
   status: string;
+  location: string;
 };
 
 export default function Board() {
@@ -187,6 +187,9 @@ export default function Board() {
               </p>
               <p>
                 <strong>Email:</strong> {submission.email}
+              </p>
+              <p>
+                <strong>Location:</strong> {submission.location}
               </p>
             </div>
             <p>
