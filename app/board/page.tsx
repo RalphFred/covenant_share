@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { fetchSubmissions, updateStatus } from "../../lib/utils";
 import { FormData } from "@/components/Form";
 
-type Submission = {
+export type Submission = {
   id: string;
   name: string;
   email: string;

@@ -1,6 +1,7 @@
 import { FormData } from "@/components/Form";
 import { db } from "../firebase"; 
 import { collection, addDoc, doc, updateDoc, getDocs, setDoc } from "firebase/firestore";
+import { Submission } from "@/app/board/page";
 
 const COLLECTION_NAME = "ride";
 
@@ -29,20 +30,15 @@ export async function submitForm(data: FormData) {
 }
 
 
-export async function fetchSubmissions() {
-  const submissionsCollection = collection(db, "submissions");
-  const querySnapshot = await getDocs(submissionsCollection);
+export const fetchSubmissions = async (): Promise<Submission[]> => {
+  const querySnapshot = await getDocs(collection(db, "submissions"));
+  const submissions: Submission[] = querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as Submission[]; 
+  return submissions;
+};
 
-  return querySnapshot.docs.map((doc) => {
-    const data = doc.data();
-    return {
-      id: doc.id,
-      ...data,
-      dateOfFlight: new Date(data.dateOfFlight), 
-      timeOfArrival: data.timeOfArrival, 
-    };
-  });
-}
 
 
 export const updateStatus = async (id: string, newStatus: string) => {
