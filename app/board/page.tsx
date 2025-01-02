@@ -121,21 +121,29 @@ export default function Board() {
 
       {/* Filter Section */}
       <div className="mb-4 flex gap-4">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="date">Date</label>
         <input
           type="date"
           value={filterDate}
           onChange={(e) => setFilterDate(e.target.value)}
           className="border p-2 rounded"
+          placeholder="Filter Time"
         />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="time">Time</label>
         <input
           type="time"
           value={filterTime}
           onChange={(e) => setFilterTime(e.target.value)}
           className="border p-2 rounded"
+          placeholder="Filter Time"
         />
+        </div>
         <button
           onClick={handleFilter}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-blue-500 text-white px-8 py-2 rounded"
         >
           Filter
         </button>
