@@ -32,7 +32,9 @@ export default function Board() {
       const savedData = localStorage.getItem("formSubmission");
       if (savedData) {
         const storedSubmission = JSON.parse(savedData) as Submission;
-        const user = data.find((submission) => submission.id === storedSubmission.id);
+        const user = data.find(
+          (submission) => submission.id === storedSubmission.id
+        );
         setUserSubmission(user || storedSubmission);
       }
 
@@ -44,10 +46,16 @@ export default function Board() {
 
   const handleFilter = () => {
     const filtered = submissions.filter((submission) => {
-      const matchesDate = filterDate
-        ? submission.dateOfFlight.split("T")[0] === filterDate
-        : true;
+      const submissionDate = new Date(submission.dateOfFlight);
+      const submissionLocalDate = new Date(
+        submissionDate.getTime() - submissionDate.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .split("T")[0]; 
 
+      const matchesDate = filterDate
+        ? submissionLocalDate === filterDate
+        : true;
       const matchesTime = filterTime
         ? submission.timeOfArrival === filterTime
         : true;
@@ -123,23 +131,23 @@ export default function Board() {
       <div className="mb-4 flex gap-4">
         <div className="flex flex-col gap-1">
           <label htmlFor="date">Date</label>
-        <input
-          type="date"
-          value={filterDate}
-          onChange={(e) => setFilterDate(e.target.value)}
-          className="border p-2 rounded"
-          placeholder="Filter Time"
-        />
+          <input
+            type="date"
+            value={filterDate}
+            onChange={(e) => setFilterDate(e.target.value)}
+            className="border p-2 rounded"
+            placeholder="Filter Time"
+          />
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="time">Time</label>
-        <input
-          type="time"
-          value={filterTime}
-          onChange={(e) => setFilterTime(e.target.value)}
-          className="border p-2 rounded"
-          placeholder="Filter Time"
-        />
+          <input
+            type="time"
+            value={filterTime}
+            onChange={(e) => setFilterTime(e.target.value)}
+            className="border p-2 rounded"
+            placeholder="Filter Time"
+          />
         </div>
         <button
           onClick={handleFilter}
@@ -152,7 +160,10 @@ export default function Board() {
       {/* List of Submissions */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {filteredSubmissions.map((submission) => (
-          <div key={submission.id} className="p-4 border rounded-lg shadow-md bg-white">
+          <div
+            key={submission.id}
+            className="p-4 border rounded-lg shadow-md bg-white"
+          >
             <p>
               <strong>Name:</strong> {submission.name}
             </p>
