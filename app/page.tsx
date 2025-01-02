@@ -1,9 +1,11 @@
-import Image from "next/image";
+import Form from "@/components/Form";
 
 export default function Home() {
+ 
   return (
-    <div>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia at perspiciatis fuga quis nobis, sapiente ipsum itaque ducimus delectus doloribus.
-    </div>
+     <div className="lg:px-24">
+      <p className="text-lg mb-8">Looking to share a ride? Enter your details below and connect with others moving from the airport to school around the same time as you.</p>
+      <Form />
+     </div>
   );
 }
