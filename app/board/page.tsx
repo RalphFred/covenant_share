@@ -51,7 +51,7 @@ export default function Board() {
         submissionDate.getTime() - submissionDate.getTimezoneOffset() * 60000
       )
         .toISOString()
-        .split("T")[0]; 
+        .split("T")[0];
 
       const matchesDate = filterDate
         ? submissionLocalDate === filterDate
@@ -162,21 +162,33 @@ export default function Board() {
         {filteredSubmissions.map((submission) => (
           <div
             key={submission.id}
-            className="p-4 border rounded-lg shadow-md bg-white"
+            className="p-4 border rounded-lg shadow-md bg-white flex flex-col gap-4"
           >
-            <p>
-              <strong>Name:</strong> {submission.name}
-            </p>
-            <p>
-              <strong>Level:</strong> {submission.level}
-            </p>
-            <p>
-              <strong>Date:</strong>{" "}
-              {new Date(submission.dateOfFlight).toDateString()}
-            </p>
-            <p>
-              <strong>Time:</strong> {submission.timeOfArrival}
-            </p>
+            <div className="flex justify-between">
+              <p>
+                <strong>Name:</strong> {submission.name}
+              </p>
+              <p>
+                <strong>Level:</strong> {submission.level}
+              </p>
+            </div>
+            <div className="flex justify-between">
+              <p>
+                <strong>Date:</strong>{" "}
+                {new Date(submission.dateOfFlight).toDateString()}
+              </p>
+              <p>
+                <strong>Time:</strong> {submission.timeOfArrival}
+              </p>
+            </div>
+            <div className="flex justify-between flex-col gap-4">
+              <p>
+                <strong>Phone Number:</strong> {submission.phoneNumber}
+              </p>
+              <p>
+                <strong>Email:</strong> {submission.email}
+              </p>
+            </div>
             <p>
               <strong>Status:</strong> {submission.status}
             </p>
