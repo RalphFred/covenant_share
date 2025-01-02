@@ -34,7 +34,7 @@ export default function RootLayout({
         {children}
         </main>
         <footer className="py-4 text-center">
-          this website was built by <a href="https://www.linkedin.com/in/kwaghuter-raphael/">Kwaghuter Raphael</a>
+          this website was built by <a href="https://www.linkedin.com/in/kwaghuter-raphael/" target="blank" className="text-blue-500 uppercase font-semibold">Kwaghuter Raphael</a>
         </footer>
       </body>
     </html>
